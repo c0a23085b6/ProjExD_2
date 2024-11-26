@@ -61,14 +61,12 @@ def game_over(screen):
     time.sleep(5)
     return
 
-
 def  create_bomb_images_and_accs() -> tuple[list[pg.Surface], list[int]]:  
     """
     爆弾の拡大サーフェスと加速度のリストを返す
     """
     bb_imgs = []  
     bb_accs = [a for a in range(1, 11)]  # 加速度リスト（1から10まで）
-    
     for r in range(1, 11):  # 1から10までの拡大率でサーフェスを生成
         bb_img = pg.Surface((20 * r, 20 * r), pg.SRCALPHA)  # 透過度を設定
         pg.draw.circle(bb_img, (255, 0, 0), (10 * r, 10 * r), 10 * r)  # 円を描画
@@ -86,7 +84,6 @@ def main():
     
     # 爆弾の拡大サーフェスと加速度を生成
     bb_imgs, bb_accs = create_bomb_images_and_accs()
-    
     bb_rct = bb_imgs[0].get_rect()  # 爆弾のRectを取得
     bb_rct.center = random.randint(0, WIDTH), random.randint(0, HEIGHT)  # 爆弾の初期位置
     
@@ -107,7 +104,6 @@ def main():
                 return  # ゲーム終了
 
         screen.blit(bg_img, [0, 0])  # 背景画像の描画
-
         if kk_rct.colliderect(bb_rct):  # こうかとんと爆弾が重なっていたら
             game_over(screen)
             break
